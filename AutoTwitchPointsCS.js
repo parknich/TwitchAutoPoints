@@ -13,11 +13,22 @@
 
   // Call the main function to start the process
   main();
+  visibilityChangeFunction();
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log("AutoTwitchPoints DOMContentLoaded")
 }, false);
+
+function manualCheckForClaimButton() {
+  const claimButton = document.querySelector('button[aria-label="Claim Bonus"]');
+  if (claimButton) {
+    console.log('Claim button is present:', claimButton);
+    claimButton.click(); // Click the claim button
+  } else {
+    console.log('Claim button not found on this page.');
+  }
+}
 
 function waitForClaimButton() {
   return new Promise((resolve) => {
@@ -50,4 +61,40 @@ async function main() {
   } catch (error) {
     console.error('Error while waiting for the claim button:', error);
   }
+}
+
+function waitForDocumentToBecomeHidden() {
+  return new Promise((resolve) => {
+    if (document.hidden) {
+      resolve();
+      return;
+    }
+
+    const visibilityChangeHandler = () => {
+      if (document.hidden) {
+        document.removeEventListener('visibilitychange', visibilityChangeHandler);
+        resolve();
+      }
+    };
+
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  });
+}
+
+async function visibilityChangeFunction() {
+  console.log('Waiting for the document to become hidden...');
+  await waitForDocumentToBecomeHidden();
+  console.log('Document is now hidden.');
+
+  // Wait for the document to become visible again
+  await new Promise((resolve) => {
+    const visibilityChangeHandler = () => {
+      if (!document.hidden) {
+        document.removeEventListener('visibilitychange', visibilityChangeHandler);
+        manualCheckForClaimButton()
+        resolve();
+      }
+    };
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+  });
 }
