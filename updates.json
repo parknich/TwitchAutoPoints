@@ -6,6 +6,10 @@
             "version": "0.1",
             "update_link": "https://github.com/parknich081/TwitchAutoPoints/releases/download/v0.1/AutoTwitchPoints.zip"
           }
+          {
+            "version": "0.2",
+            "update_link": "https://github.com/parknich081/TwitchAutoPoints/releases/download/v0.2/AutoTwitchPointsv0.2.zip"
+          }
         ]
       }
     }
