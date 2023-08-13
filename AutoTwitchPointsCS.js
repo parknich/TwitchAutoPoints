@@ -46,21 +46,13 @@ function waitForClaimButton() {
 
 function claimButtonAppearedCallback(claimButton) {
   console.log('%c Claim button has appeared:', claimButton< "color:green;");
-  try {
+  try { 
     claimButton.click(); // Click the claim button
   } catch(error) {
     console.error("Error while trying to click claim button: ", error)
   }
   console.log("%c Claim button clicked", "color:green;");
-}
-
-async function main() {
-  try {
-    const button = await waitForClaimButton();
-    claimButtonAppearedCallback(button);
-  } catch (error) {
-    console.error('Error while waiting for the claim button:', error);
-  }
+  main();
 }
 
 function waitForDocumentToBecomeHidden() {
@@ -98,3 +90,15 @@ async function visibilityChangeFunction() {
     document.addEventListener('visibilitychange', visibilityChangeHandler);
   });
 }
+
+
+
+async function main() {
+  try {
+    const button = await waitForClaimButton();
+    claimButtonAppearedCallback(button);
+  } catch (error) {
+    console.error('Error while waiting for the claim button:', error);
+  }
+}
+
