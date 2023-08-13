@@ -1,2 +1,2 @@
 # TwitchAutoPoints
-automatically clicks the twitch points bar
+automatically clicks the twitch bonus points button
