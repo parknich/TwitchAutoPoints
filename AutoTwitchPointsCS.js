@@ -99,6 +99,7 @@ async function main() {
     claimButtonAppearedCallback(button);
   } catch (error) {
     console.error('Error while waiting for the claim button:', error);
+    main();
   }
 }
 
